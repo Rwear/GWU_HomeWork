@@ -56,6 +56,8 @@ def append_to_sequence(sequence, key, i, j):
         sequence[key].append([i, j + 1])
 
 
+# Calculate if there is a position around the current letter that can be assigned,
+# if exist calculate the previous and next letter of it and record that position to an assign map
 def mrv(field, record):
     sequence = {}
 
@@ -84,6 +86,7 @@ def mrv(field, record):
     return sequence
 
 
+# calculate the number of position which is not assign, it is the influence of current position
 def lcv(field, sequence):
     influence = [[0] * len(row) for row in field]
     for i in range(len(field)):

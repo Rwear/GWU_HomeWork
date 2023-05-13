@@ -141,12 +141,14 @@ def csp(field, record):
     # print(field)
     # Calculate the order of filling in the blanks
     sequence = mrv(field, record)
+    # print(sequence)
     # AC3,if there is no possible, return it
     for value in sequence.values():
         if len(value) == 0:
             return False
     # Calculate how many position selections each space can influence
     influence = lcv(field, sequence)
+    print(influence)
     # sort the influence increased
     sorted_sequence = {
         key: sorted(values, key=lambda x: influence[x[0]][x[1]], reverse=True)

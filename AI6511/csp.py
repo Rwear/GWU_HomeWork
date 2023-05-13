@@ -148,7 +148,7 @@ def csp(field, record):
             return False
     # Calculate how many position selections each space can influence
     influence = lcv(field, sequence)
-    print(influence)
+    # print(influence)
     # sort the influence increased
     sorted_sequence = {
         key: sorted(values, key=lambda x: influence[x[0]][x[1]], reverse=True)

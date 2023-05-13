@@ -1,5 +1,11 @@
 CSP：
-
+field = [
+    [" ", " ", " ", " ", "Y"],
+    ["R", "A", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", "E", " ", " ", " "],
+    [" ", " ", " ", " ", "K"]
+]
 Step 1:
 MRV: calculate each exist letter previous and next letter exist how many position that can be assigned.
 Ex. Here it will be

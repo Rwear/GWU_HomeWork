@@ -9,12 +9,6 @@ start_status = [
     [21, 2, 23, 24, 6, 26, 27, 9, 29, 30]
 ]
 
-# start_status = [
-#     [1, 3, 2, 13, 5, 6, 7, 8, 28, 10],
-#     [11, 12, 4, 14, 15, 16, 17, 18, 19, 20],
-#     [21, 22, 23, 24, 25, 26, 27, 9, 29, 30]
-# ]
-
 target_status = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
@@ -22,6 +16,7 @@ target_status = [
 ]
 
 
+# generate a possible target list for all condition
 def generate_targets():
     ranges = [
         list(range(1, 11)),
@@ -55,7 +50,7 @@ def heuristic(current_status, target_status):
             res += abs(x - j) + abs(y - k)
     return res / 2
 
-
+# find the minimum manhattan distance from current and target
 def best_order(current_status, target_status):
     min_res = float('inf')
     for i in range(len(target_status)):
@@ -73,7 +68,7 @@ def astar(start_status):
     print(target, h)
     visited = set()
     visited.add(str(start_status))
-    # fn,hn,gn,current_status,path
+    # fn,hn,gn,current_status,paths
     queue = [(h, h, 0, start_status, [])]
     moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 

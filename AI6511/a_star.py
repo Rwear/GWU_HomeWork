@@ -1,11 +1,12 @@
 import copy
 import itertools
 import heapq
+
 #
 start_status = [
-    [1, 30, 3, 4, 14, 28, 7, 8, 23, 10],
-    [11, 25, 13, 5, 15, 16, 26, 18, 19, 21],
-    [20, 22, 9, 24, 12, 17, 27, 6, 29, 2]
+    [1, 22, 12, 4, 5, 25, 7, 8, 28, 10],
+    [11, 3, 13, 14, 15, 16, 17, 18, 19, 20],
+    [21, 2, 23, 24, 6, 26, 27, 9, 29, 30]
 ]
 
 # start_status = [
@@ -52,7 +53,7 @@ def heuristic(current_status, target_status):
             ele = current[target_status[j][k]]
             x, y = ele[0], ele[1]
             res += abs(x - j) + abs(y - k)
-    return res/2
+    return res / 2
 
 
 def best_order(current_status, target_status):
@@ -77,7 +78,7 @@ def astar(start_status):
     moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
     while queue:
-        _, hn, gn, current_status, paths = heapq.heappop(queue)
+        fn, hn, gn, current_status, paths = heapq.heappop(queue)
 
         if current_status == target:
             return gn, paths
@@ -99,5 +100,6 @@ def astar(start_status):
                             heapq.heappush(queue, (new_gn + new_hn, new_hn, new_gn, new_state, new_paths))
                             visited.add(str(new_state))
     return
+
 
 print(astar(start_status))

@@ -24,20 +24,19 @@ field = [
     [" ", " ", " ", " ", "K"]
 ]
 
-field2 = [
-    ['A', 'B', 'C', 'D', 'E'],
-    ['J', 'I', 'H', 'G', 'F'],
-    ['K', 'L', 'M', 'N', 'O'],
-    ['T', 'S', 'R', 'Q', 'P'],
-    ['U', 'V', 'W', 'X', 'Y']
-]
+
+# field2 = [
+#     ['A', 'B', 'C', 'D', 'E'],
+#     ['J', 'I', 'H', 'G', 'F'],
+#     ['K', 'L', 'M', 'N', 'O'],
+#     ['T', 'S', 'R', 'Q', 'P'],
+#     ['U', 'V', 'W', 'X', 'Y']
+# ]
 
 # for row in field:
 #     for value in row:
 #         print(value, end=" ")
 #     print()
-
-record = set()
 
 
 def append_to_sequence(sequence, key, i, j):
@@ -132,38 +131,28 @@ def is_alphabet_sequence(field):
     return len(letters_found) == 25
 
 
-print(is_alphabet_sequence(field2))
-
-
 def csp(field, record):
+    # If find the answer return true
     if is_alphabet_sequence(field):
         return True
     # print(field)
+    # Calculate the order of filling in the blanks
     sequence = mrv(field, record)
+    # AC3,if there is no possible, return it
     for value in sequence.values():
         if len(value) == 0:
             return False
-
-    # print("--------------------------------------------------------------------------")
-    # print(sequence)
+    # Calculate how many position selections each space can influence
     influence = lcv(field, sequence)
-    # for row in influence:
-    #     for value in row:
-    #         print(value, end=" ")
-    #     print()
-    # for row in field:
-    #     for value in row:
-    #         print(value, end=" ")
-    #     print()
-    # print(record)
+    # sort the influence increased
     sorted_sequence = {
         key: sorted(values, key=lambda x: influence[x[0]][x[1]], reverse=True)
         for key, values in sequence.items()
     }
-    # print(sorted_sequence)
-    # print('fe')
+
     for key in sequence:
         if key not in record:
+            # choose each from the record
             for indices in sequence[key]:
                 i, j = indices
                 record.add(key)
@@ -177,6 +166,12 @@ def csp(field, record):
     return False
 
 
+for row in field:
+    for value in row:
+        print(value, end=" ")
+    print()
+
+record = set()
 if csp(field, record):
     # print(field)
     for row in field:
@@ -185,4 +180,3 @@ if csp(field, record):
         print()
 else:
     print("can not find")
-

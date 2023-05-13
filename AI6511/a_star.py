@@ -1,12 +1,18 @@
 import copy
 import itertools
 import heapq
-
+#
 start_status = [
     [1, 30, 3, 4, 14, 28, 7, 8, 23, 10],
     [11, 25, 13, 5, 15, 16, 26, 18, 19, 21],
     [20, 22, 9, 24, 12, 17, 27, 6, 29, 2]
 ]
+
+# start_status = [
+#     [1, 3, 2, 13, 5, 6, 7, 8, 28, 10],
+#     [11, 12, 4, 14, 15, 16, 17, 18, 19, 20],
+#     [21, 22, 23, 24, 25, 26, 27, 9, 29, 30]
+# ]
 
 target_status = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -57,7 +63,7 @@ def best_order(current_status, target_status):
         if res < min_res:
             min_res = res
             min_i = i
-    return target_status[i], min_res
+    return target_status[min_i], min_res
 
 
 def astar(start_status):
@@ -71,10 +77,10 @@ def astar(start_status):
     moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
     while queue:
-        fn, hn, gn, current_status, paths = heapq.heappop(queue)
+        _, hn, gn, current_status, paths = heapq.heappop(queue)
 
         if current_status == target:
-            return fn, paths
+            return gn, paths
         for i in range(len(target)):
             for j in range(len(target[0])):
                 for move in moves:
@@ -92,6 +98,6 @@ def astar(start_status):
                         if str(new_state) not in visited:
                             heapq.heappush(queue, (new_gn + new_hn, new_hn, new_gn, new_state, new_paths))
                             visited.add(str(new_state))
-
+    return
 
 print(astar(start_status))
